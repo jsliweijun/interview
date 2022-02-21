@@ -1,0 +1,27 @@
+{
+    "name": "interview",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "scripts": {
+        "dev": "vuepress dev docs",
+        "docs:build": "vuepress build docs",
+        "deploy": "sh deploy.sh"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": ""
+    },
+    "homepage": "",
+    "devDependencies": {
+        "vuepress": "^1.9.7"
+    }
+}
