@@ -4,7 +4,79 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CSS 盒模型</title>
+        <title>
+            CSS 盒模型出现垂直方向 外边距 margin-top/margin-bottom 重叠问题
+        </title>
+        <style>
+            html * {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
     </head>
-    <body></body>
+    <body>
+        <section class="parent">
+            <style>
+                .parent {
+                    /* padding-top: 10px; 有 padding 后就不重叠了,子元素的 margin-top 就出不去了; */
+                    /* border: 1px solid black;  添加 border 后也不重叠了 */
+                    margin-top: 10px;
+                    /* overflow: hidden;  给父元素添加 bfc规则，子元素的margin-top 就不能出父元素了，解决重叠问题 */
+                }
+                .child {
+                    height: 100px;
+                    margin-top: 20px;
+                    padding-top: 10px;
+                    background: red;
+                }
+            </style>
+            <article class="child"></article>
+        </section>
+
+        <section class="brother">
+            <style>
+                .brother {
+                    margin-top: 20px;
+                    border: 1px solid black;
+                }
+                .top {
+                    height: 100px;
+                    margin: 10px 0;
+                    background: red;
+                }
+                /* 当前情况出现 margin-top 重叠，两个兄弟元素相隔的距离只有 20px ，
+                解决方案是在 top或者bottom盒子上套一个盒子增加BFC规则
+                 */
+                .bottom {
+                    height: 100px;
+                    margin: 20px 0;
+                    background: yellow;
+                }
+            </style>
+            <!-- 解决方案 
+                <div style="overflow: hidden">
+                <article class="top"></article>
+            </div> -->
+            <article class="top"></article>
+            <article class="bottom"></article>
+        </section>
+
+        <section class="empty-con">
+            <style>
+                .empty-con {
+                    border: 1px solid red;
+                }
+                .empty {
+                    margin-top: 30px;
+                    /* 
+                    加内容或者，加 以下样式，都可以避免重叠
+                    border:1px solid black;
+                     padding-top: 3px;
+                    padding-bottom: 6px; */
+                    margin-bottom: 10px;
+                }
+            </style>
+            <article class="empty"></article>
+        </section>
+    </body>
 </html>
